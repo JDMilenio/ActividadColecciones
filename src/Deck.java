@@ -4,13 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+// Representa el mazo completo de 52 cartas de poker
 public class Deck {
-    private final LinkedList<Card> cards;     // mazo activo
-    private final List<Card>       discarded; // cartas extraídas
+    private final LinkedList<Card> cards;     // cartas disponibles en el mazo
+    private final List<Card>       discarded; // cartas ya extraídas
 
     private static final String[] PALOS  = {"Treboles", "Corazones", "Picas", "Diamantes"};
     private static final String[] VALORES = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 
+    // Inicializa las 52 cartas respetando el color de cada palo
     public Deck() {
         cards     = new LinkedList<>();
         discarded = new ArrayList<>();
@@ -24,21 +26,24 @@ public class Deck {
 
     public List<Card> getDiscarded() { return discarded; }
 
+    // Mezcla el mazo de forma aleatoria
     public void shuffle() {
         Collections.shuffle(cards);
         System.out.println("Se mezcló el Deck.");
     }
 
+    // Extrae y muestra la primera carta del mazo
     public void head() {
-        if (cards.isEmpty()) { System.out.println("El deck esta vacio."); return; }
+        if (cards.isEmpty()) { System.out.println("El deck está vacío."); return; }
         Card c = cards.removeFirst();
         discarded.add(c);
         System.out.println(c);
         System.out.println("Quedan " + cards.size());
     }
 
+    // Extrae y muestra una carta al azar del mazo
     public void pick() {
-        if (cards.isEmpty()) { System.out.println("El deck esta vacio."); return; }
+        if (cards.isEmpty()) { System.out.println("El deck está vacío."); return; }
         int idx = new Random().nextInt(cards.size());
         Card c = cards.remove(idx);
         discarded.add(c);
@@ -46,6 +51,7 @@ public class Deck {
         System.out.println("Quedan " + cards.size());
     }
 
+    // Extrae y muestra las primeras cinco cartas del mazo
     public Card[] hand() {
         int n = Math.min(5, cards.size());
         Card[] hand = new Card[n];
